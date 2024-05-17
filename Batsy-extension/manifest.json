@@ -1,0 +1,13 @@
+{
+    "manifest_version": 3,
+    "name": "Extension de batsy",
+    "version" : "1.0",
+    "description": "Extensión del guía virtual 'Batsy'",
+    "icons":{
+        "128":"batsy.png"
+    },
+    "action": {
+        "default_popup": "popup.html"
+    }
+
+}
