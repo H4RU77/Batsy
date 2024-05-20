@@ -1,18 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const leerBtn = document.getElementById("leerBtn");
-    const textoInput = document.getElementById("texto");
+  const leerBtn = document.getElementById("leerBtn");
+  const textoInput = document.getElementById("texto");
 
+  // Función para leer el texto en español
+  const leerTexto = (texto) => {
+      // Crear una instancia de SpeechSynthesisUtterance
+      const utterance = new SpeechSynthesisUtterance(texto);
+      
+      // Configurar el idioma a español
+      utterance.lang = 'es-ES';
 
-    //lee el texto ingresado
-    leerBtn.addEventListener("click", () => {
+      // Opcional: Configurar otros parámetros de la voz
+      utterance.pitch = 1; // Tono
+      utterance.rate = 1; // Velocidad
+      utterance.volume = 1; // Volumen
+
+      // Hablar el texto
+      window.speechSynthesis.speak(utterance);
+  };
+
+  // Lee el texto ingresado cuando se hace clic en el botón
+  leerBtn.addEventListener("click", () => {
       const texto = textoInput.value;
-      chrome.runtime.sendMessage({ action: "leerTexto", texto: texto }, response => {
-        if (response && response.status) {
-          console.log(response.status);
-        } else {
-          console.error('No se recibió una respuesta válida del background script');
-        }
-      });
-    });
+      leerTexto(texto);
   });
-  
+});
